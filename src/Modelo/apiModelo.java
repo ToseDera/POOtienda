@@ -6,14 +6,15 @@ public class apiModelo {
     public String name = "";
     public String url = "";
     public String password = "";
-    public int usuariosConectados;
-    public int minUsuariosActivos;
+    private int usuariosConectados = 0;
+    private int minUsuariosActivos = 0;
+    String ultimoError = null;
 
     // Constructor
     public apiModelo(String datoName, String datoUrl, String datoPassword) {
-        this.name = datoName;
-        this.url = datoUrl;
-        this.password = datoPassword;
+        setName(datoName);
+        setUrl(datoUrl);
+        setPassword(datoPassword);
     }
 
     // Getters
@@ -29,32 +30,109 @@ public class apiModelo {
         return password;
     }
 
+    public String getUltimoError() {
+        return ultimoError;
+    }
+
+    public int getUsuariosConectados() {
+        return usuariosConectados;
+    }
+
+    public int getMinUsuariosActivos() {
+        return minUsuariosActivos;
+    }
+
     // Setters
-    public void setName(String name) {
+    public boolean setName(String name) {
+        String error = validarName(name);
+        if (error != null) {
+            this.ultimoError = error;
+            return false;
+        }
         this.name = name;
+        this.ultimoError = null;
+        return true;
     }
 
-    public void setUrl(String url) {
+    public boolean setUrl(String url) {
+        String error = validarUrl(url);
+        if (error != null) {
+            this.ultimoError = error;
+            return false;
+        }
         this.url = url;
+        this.ultimoError = null;
+        return true;
     }
 
-    public void setPassword(String password) {
+    public boolean setPassword(String password) {
+        String error = validarPassword(password);
+        if (error != null) {
+            this.ultimoError = error;
+            return false;
+        }
         this.password = password;
+        this.ultimoError = null;
+        return true;
     }
 
-    public void setMinUsuariosActivos(int minUsuariosActivos) {
+    public boolean setMinUsuariosActivos(int minUsuariosActivos) {
+        String error = validarMinUsuariosActivos(minUsuariosActivos);
+        if (error != null) {
+            this.ultimoError = error;
+            return false;
+        }
         this.minUsuariosActivos = minUsuariosActivos;
+        this.ultimoError = null;
+        return true;
+    }
+
+    // Validaciones: devuelven el mensaje de error, o null si el dato es valido
+    public String validarName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return "El nombre de la API no puede estar vacio";
+        }
+        return null;
+    }
+
+    public String validarUrl(String url) {
+        if (url == null || url.trim().isEmpty()) {
+            return "La URL no puede estar vacia";
+        }
+        if (!url.trim().matches("^https?://[\\w.-]+(:\\d+)?(/.*)?$")) {
+            return "La URL debe tener un formato valido (http:// o https://)";
+        }
+        return null;
+    }
+
+    public String validarPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            return "La contrasena no puede estar vacia";
+        }
+        if (password.length() < 6) {
+            return "La contrasena debe tener al menos 6 caracteres";
+        }
+        return null;
+    }
+
+    public String validarMinUsuariosActivos(int minUsuariosActivos) {
+        if (minUsuariosActivos < 0) {
+            return "El minimo de usuarios activos no puede ser negativo";
+        }
+        return null;
+    }
+
+    // Valida que la api tenga todos sus datos correctos
+    public boolean esValido() {
+        return validarName(name) == null
+                && validarUrl(url) == null
+                && validarPassword(password) == null
+                && validarMinUsuariosActivos(minUsuariosActivos) == null;
     }
 
     // Metodos
     public Boolean validarConexion() {
-        Boolean respuesta = true;
-
-        if (this.name == "" || this.url == "" || this.password == "") {
-            respuesta = false;
-        }
-
-        return respuesta;
+        return esValido();
     }
 
     // Valida usuarios conectados
@@ -67,5 +145,21 @@ public class apiModelo {
         if (validarDesconexion()) {
             this.usuariosConectados = 0;
         }
+    }
+
+    // Registra la conexion de un usuario
+    public void conectarUsuario() {
+        this.usuariosConectados++;
+    }
+
+    // Registra la desconexion de un usuario puntual (no confundir con desconexion() masiva)
+    public boolean desconectarUsuario() {
+        if (this.usuariosConectados <= 0) {
+            this.ultimoError = "No hay usuarios conectados para desconectar";
+            return false;
+        }
+        this.usuariosConectados--;
+        desconexion();
+        return true;
     }
 }
