@@ -28,12 +28,12 @@ public class pasajeroModelo {
         return cedulaPasajero;
     }
 
-    // Devuelve el mensaje del ultimo error de validacion, o null si el ultimo set fue exitoso
+    // Devuelve el mensaje del último error de validación, o null si el último set fue exitoso
     public String getUltimoError() {
         return ultimoError;
     }
 
-    // Setters (solo aplican el dato si pasa la validacion)
+    // Setters (solo aplican el dato si pasa la validación)
     public boolean setNombrePasajero(String nombrePasajero) {
         String error = validarNombre(nombrePasajero);
         if (error != null) {
@@ -67,10 +67,10 @@ public class pasajeroModelo {
         return true;
     }
 
-    // Validaciones: devuelven el mensaje de error, o null si el dato es valido
+    // Validaciones: devuelven el mensaje de error, o null si el dato es válido
     public String validarNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
-            return "El nombre no puede estar vacio";
+            return "El nombre no puede estar vacío";
         }
         if (!nombre.trim().matches("[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}")) {
             return "El nombre solo puede contener letras y espacios, entre 2 y 50 caracteres";
@@ -80,10 +80,10 @@ public class pasajeroModelo {
 
     public String validarCedula(String cedula) {
         if (cedula == null || cedula.trim().isEmpty()) {
-            return "La cedula no puede estar vacia";
+            return "La cédula no puede estar vacía";
         }
         if (!cedula.matches("[0-9]{6,10}")) {
-            return "La cedula debe contener solo numeros, entre 6 y 10 digitos";
+            return "La cédula debe contener solo números, entre 6 y 10 dígitos";
         }
         return null;
     }

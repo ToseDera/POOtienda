@@ -87,37 +87,37 @@ public class apiModelo {
         return true;
     }
 
-    // Validaciones: devuelven el mensaje de error, o null si el dato es valido
+    // Validaciones: devuelven el mensaje de error, o null si el dato es válido
     public String validarName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            return "El nombre de la API no puede estar vacio";
+            return "El nombre de la API no puede estar vacío";
         }
         return null;
     }
 
     public String validarUrl(String url) {
         if (url == null || url.trim().isEmpty()) {
-            return "La URL no puede estar vacia";
+            return "La URL no puede estar vacía";
         }
         if (!url.trim().matches("^https?://[\\w.-]+(:\\d+)?(/.*)?$")) {
-            return "La URL debe tener un formato valido (http:// o https://)";
+            return "La URL debe tener un formato válido (http:// o https://)";
         }
         return null;
     }
 
     public String validarPassword(String password) {
         if (password == null || password.isEmpty()) {
-            return "La contrasena no puede estar vacia";
+            return "La contraseña no puede estar vacía";
         }
         if (password.length() < 6) {
-            return "La contrasena debe tener al menos 6 caracteres";
+            return "La contraseña debe tener al menos 6 caracteres";
         }
         return null;
     }
 
     public String validarMinUsuariosActivos(int minUsuariosActivos) {
         if (minUsuariosActivos < 0) {
-            return "El minimo de usuarios activos no puede ser negativo";
+            return "El mínimo de usuarios activos no puede ser negativo";
         }
         return null;
     }
@@ -130,7 +130,7 @@ public class apiModelo {
                 && validarMinUsuariosActivos(minUsuariosActivos) == null;
     }
 
-    // Metodos
+    // Métodos
     public Boolean validarConexion() {
         return esValido();
     }
@@ -140,19 +140,19 @@ public class apiModelo {
         return this.usuariosConectados < this.minUsuariosActivos;
     }
 
-    // Desconexion si aplica
+    // Desconexión si aplica
     public void desconexion() {
         if (validarDesconexion()) {
             this.usuariosConectados = 0;
         }
     }
 
-    // Registra la conexion de un usuario
+    // Registra la conexión de un usuario
     public void conectarUsuario() {
         this.usuariosConectados++;
     }
 
-    // Registra la desconexion de un usuario puntual (no confundir con desconexion() masiva)
+    // Registra la desconexión de un usuario puntual (no confundir con desconexion() masiva)
     public boolean desconectarUsuario() {
         if (this.usuariosConectados <= 0) {
             this.ultimoError = "No hay usuarios conectados para desconectar";

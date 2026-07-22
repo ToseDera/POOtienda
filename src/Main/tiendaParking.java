@@ -12,19 +12,19 @@ public class tiendaParking {
         int opcion = -1;
 
         while (opcion != 0) {
-            System.out.println("\n--- Menu Parking ---");
+            System.out.println("\n--- Menú Parking ---");
             System.out.println("1. Registrar chofer");
             System.out.println("2. Registrar carro");
             System.out.println("3. Registrar motor");
             System.out.println("4. Registrar pasajero");
             System.out.println("0. Salir");
-            System.out.print("Seleccione una opcion: ");
+            System.out.print("Seleccione una opción: ");
 
             String entrada = sc.nextLine();
             try {
                 opcion = Integer.parseInt(entrada.trim());
             } catch (NumberFormatException e) {
-                System.out.println("Opcion invalida");
+                System.out.println("Opción inválida");
                 continue;
             }
 
@@ -45,7 +45,7 @@ public class tiendaParking {
                     System.out.println("Saliendo...");
                     break;
                 default:
-                    System.out.println("Opcion invalida");
+                    System.out.println("Opción inválida");
             }
         }
 

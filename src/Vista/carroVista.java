@@ -42,7 +42,7 @@ public class carroVista {
 
         String modelo;
         do {
-            System.out.print("Modelo (anio) del carro: ");
+            System.out.print("Modelo (año) del carro: ");
             modelo = sc.nextLine();
             exito = objCarro.setModeloCarro(modelo);
             if (!exito) {
@@ -52,7 +52,8 @@ public class carroVista {
 
         carroControlador controlador = new carroControlador();
         String resultado = controlador.datos_registrar_carro(
-                objCarro.getPlacaCarro(), objCarro.getColorCarro(), objCarro.getMarcaCarro(), objCarro.getModeloCarro());
+                objCarro.getPlacaCarro(), objCarro.getColorCarro(), objCarro.getMarcaCarro(),
+                objCarro.getModeloCarro());
         System.out.println(resultado);
     }
 }

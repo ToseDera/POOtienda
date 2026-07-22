@@ -32,7 +32,7 @@ public class choferVista {
 
         String cedula;
         do {
-            System.out.print("Cedula del chofer: ");
+            System.out.print("Cédula del chofer: ");
             cedula = sc.nextLine();
             exito = objChofer.setCedulaChofer(cedula);
             if (!exito) {

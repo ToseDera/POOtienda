@@ -24,12 +24,12 @@ public class motorModelo {
         return caballosFuerza;
     }
 
-    // Devuelve el mensaje del ultimo error de validacion, o null si el ultimo set fue exitoso
+    // Devuelve el mensaje del último error de validación, o null si el último set fue exitoso
     public String getUltimoError() {
         return ultimoError;
     }
 
-    // Setters (solo aplican el dato si pasa la validacion)
+    // Setters (solo aplican el dato si pasa la validación)
     public boolean setTipoMotor(String tipoMotor) {
         String error = validarTipoMotor(tipoMotor);
         if (error != null) {
@@ -52,10 +52,10 @@ public class motorModelo {
         return true;
     }
 
-    // Validaciones: devuelven el mensaje de error, o null si el dato es valido
+    // Validaciones: devuelven el mensaje de error, o null si el dato es válido
     public String validarTipoMotor(String tipoMotor) {
         if (tipoMotor == null || tipoMotor.trim().isEmpty()) {
-            return "El tipo de motor no puede estar vacio";
+            return "El tipo de motor no puede estar vacío";
         }
         for (String tipo : TIPOS_VALIDOS) {
             if (tipo.equalsIgnoreCase(tipoMotor.trim())) {
@@ -67,10 +67,10 @@ public class motorModelo {
 
     public String validarCaballosFuerza(String caballosFuerza) {
         if (caballosFuerza == null || caballosFuerza.trim().isEmpty()) {
-            return "Los caballos de fuerza no pueden estar vacios";
+            return "Los caballos de fuerza no pueden estar vacíos";
         }
         if (!caballosFuerza.trim().matches("[0-9]{1,4}")) {
-            return "Los caballos de fuerza deben ser un numero entero";
+            return "Los caballos de fuerza deben ser un número entero";
         }
         int valor = Integer.parseInt(caballosFuerza.trim());
         if (valor < 1 || valor > 2000) {

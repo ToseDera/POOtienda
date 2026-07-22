@@ -31,7 +31,7 @@ public class pasajeroControlador {
         return "Pasajero registrado correctamente\n"
                 + "Nombre: " + objPasajero.getNombrePasajero() + "\n"
                 + "Apellido: " + objPasajero.getApellidoPasajero() + "\n"
-                + "Cedula: " + objPasajero.getCedulaPasajero();
+                + "Cédula: " + objPasajero.getCedulaPasajero();
     }
 
     public pasajeroModelo getUltimoPasajeroRegistrado() {

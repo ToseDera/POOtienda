@@ -69,7 +69,7 @@ public class choferModelo {
     // Validaciones
     public String validarNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
-            return "El nombre no puede estar vacio";
+            return "El nombre no puede estar vacío";
         }
         if (!nombre.trim().matches("[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}")) {
             return "El nombre solo puede contener letras y espacios, entre 2 y 50 caracteres";
@@ -79,10 +79,10 @@ public class choferModelo {
 
     public String validarCedula(String cedula) {
         if (cedula == null || cedula.trim().isEmpty()) {
-            return "La cedula no puede estar vacia";
+            return "La cédula no puede estar vacía";
         }
         if (!cedula.matches("[0-9]{6,10}")) {
-            return "La cedula debe contener solo numeros, entre 6 y 10 digitos";
+            return "La cédula debe contener solo números, entre 6 y 10 dígitos";
         }
         return null;
     }

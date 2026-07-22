@@ -32,7 +32,7 @@ public class pasajeroVista {
 
         String cedula;
         do {
-            System.out.print("Cedula del pasajero: ");
+            System.out.print("Cédula del pasajero: ");
             cedula = sc.nextLine();
             exito = objPasajero.setCedulaPasajero(cedula);
             if (!exito) {

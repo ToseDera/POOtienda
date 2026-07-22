@@ -30,7 +30,7 @@ public class choferControlador {
 
         return "Chofer registrado correctamente\n"
                 + "Nombre: " + objChofer.getNombreChofer() + "\n" + "Apellido: " + objChofer.getApellidoChofer() + "\n"
-                + "Cedula: " + objChofer.getCedulaChofer();
+                + "Cédula: " + objChofer.getCedulaChofer();
     }
 
     public choferModelo getUltimoChoferRegistrado() {
