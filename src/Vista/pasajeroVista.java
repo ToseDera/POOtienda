@@ -1,6 +1,6 @@
 package Vista;
 
-import Controlador.pasajeroControlador;
+import Controlador.frontController;
 import Modelo.pasajeroModelo;
 import java.util.Scanner;
 
@@ -40,7 +40,7 @@ public class pasajeroVista {
             }
         } while (!exito);
 
-        pasajeroControlador controlador = new pasajeroControlador();
+        frontController controlador = new frontController();
         String resultado = controlador.datos_registrar_pasajero(
                 objPasajero.getNombrePasajero(), objPasajero.getApellidoPasajero(), objPasajero.getCedulaPasajero());
         System.out.println(resultado);

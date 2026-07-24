@@ -1,6 +1,6 @@
 package Vista;
 
-import Controlador.choferControlador;
+import Controlador.frontController;
 import Modelo.choferModelo;
 import java.util.Scanner;
 
@@ -40,7 +40,7 @@ public class choferVista {
             }
         } while (!exito);
 
-        choferControlador controlador = new choferControlador();
+        frontController controlador = new frontController();
         String resultado = controlador.datos_registrar_chofer(
                 objChofer.getNombreChofer(), objChofer.getApellidoChofer(), objChofer.getCedulaChofer());
         System.out.println(resultado);

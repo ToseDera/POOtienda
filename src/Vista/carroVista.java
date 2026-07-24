@@ -1,6 +1,6 @@
 package Vista;
 
-import Controlador.carroControlador;
+import Controlador.frontController;
 import Modelo.carroModelo;
 import java.util.Scanner;
 
@@ -50,7 +50,7 @@ public class carroVista {
             }
         } while (!exito);
 
-        carroControlador controlador = new carroControlador();
+        frontController controlador = new frontController();
         String resultado = controlador.datos_registrar_carro(
                 objCarro.getPlacaCarro(), objCarro.getColorCarro(), objCarro.getMarcaCarro(),
                 objCarro.getModeloCarro());

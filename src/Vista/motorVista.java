@@ -1,6 +1,6 @@
 package Vista;
 
-import Controlador.motorControlador;
+import Controlador.frontController;
 import Modelo.motorModelo;
 import java.util.Scanner;
 
@@ -30,7 +30,7 @@ public class motorVista {
             }
         } while (!exito);
 
-        motorControlador controlador = new motorControlador();
+        frontController controlador = new frontController();
         String resultado = controlador.datos_registrar_motor(objMotor.getTipoMotor(), objMotor.getCaballosFuerza());
         System.out.println(resultado);
     }
