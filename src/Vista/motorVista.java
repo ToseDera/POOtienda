@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class motorVista {
 
-    public void vistaMotor(Scanner sc) {
-        motorModelo objMotor = new motorModelo("", "");
+    public void vistaMotor(Scanner sc, frontController controlador) {
+        motorModelo objMotor = new motorModelo("", "", "");
         boolean exito;
 
         String tipoMotor;
@@ -15,6 +15,16 @@ public class motorVista {
             System.out.print("Tipo de motor (Gasolina, Diesel, Electrico, Hibrido, Gas): ");
             tipoMotor = sc.nextLine();
             exito = objMotor.setTipoMotor(tipoMotor);
+            if (!exito) {
+                System.out.println("Error: " + objMotor.getUltimoError());
+            }
+        } while (!exito);
+
+        String numeroSerie;
+        do {
+            System.out.print("Número de serie del motor: ");
+            numeroSerie = sc.nextLine();
+            exito = objMotor.setNumeroSerie(numeroSerie);
             if (!exito) {
                 System.out.println("Error: " + objMotor.getUltimoError());
             }
@@ -30,8 +40,8 @@ public class motorVista {
             }
         } while (!exito);
 
-        frontController controlador = new frontController();
-        String resultado = controlador.datos_registrar_motor(objMotor.getTipoMotor(), objMotor.getCaballosFuerza());
+        String resultado = controlador.datos_registrar_motor(
+                objMotor.getTipoMotor(), objMotor.getNumeroSerie(), objMotor.getCaballosFuerza());
         System.out.println(resultado);
     }
 }

@@ -1,11 +1,14 @@
 package Controlador;
 
+import Modelo.apiModelo;
 import Modelo.carroModelo;
 import Modelo.choferModelo;
 import Modelo.motorModelo;
 import Modelo.pasajeroModelo;
 
 public class frontController {
+
+    private final apiModelo repositorio = new apiModelo();
 
     private carroModelo ultimoCarroRegistrado;
     private choferModelo ultimoChoferRegistrado;
@@ -38,6 +41,7 @@ public class frontController {
         }
 
         this.ultimoCarroRegistrado = objCarro;
+        repositorio.guardarCarro(objCarro);
 
         return "Carro registrado correctamente\n"
                 + "Placa: " + objCarro.getPlacaCarro() + "\n"
@@ -46,14 +50,15 @@ public class frontController {
                 + "Modelo: " + objCarro.getModeloCarro();
     }
 
-    public String datos_registrar_chofer(String nombre, String apellido, String cedula) {
-        choferModelo objChofer = new choferModelo(nombre, apellido, cedula);
+    public String datos_registrar_chofer(String nombre, String apellido, String cedula, String licencia) {
+        choferModelo objChofer = new choferModelo(nombre, apellido, cedula, licencia);
 
         String errorNombre = objChofer.validarNombre(nombre);
         String errorApellido = objChofer.validarNombre(apellido);
         String errorCedula = objChofer.validarCedula(cedula);
+        String errorLicencia = objChofer.validarLicencia(licencia);
 
-        if (errorNombre != null || errorApellido != null || errorCedula != null) {
+        if (errorNombre != null || errorApellido != null || errorCedula != null || errorLicencia != null) {
             StringBuilder mensaje = new StringBuilder("No se pudo registrar el chofer:\n");
             if (errorNombre != null) {
                 mensaje.append("- ").append(errorNombre).append("\n");
@@ -64,37 +69,48 @@ public class frontController {
             if (errorCedula != null) {
                 mensaje.append("- ").append(errorCedula).append("\n");
             }
+            if (errorLicencia != null) {
+                mensaje.append("- ").append(errorLicencia).append("\n");
+            }
             return mensaje.toString();
         }
 
         this.ultimoChoferRegistrado = objChofer;
+        repositorio.guardarChofer(objChofer);
 
         return "Chofer registrado correctamente\n"
                 + "Nombre: " + objChofer.getNombreChofer() + "\n" + "Apellido: " + objChofer.getApellidoChofer() + "\n"
-                + "Cédula: " + objChofer.getCedulaChofer();
+                + "Cédula: " + objChofer.getCedulaChofer() + "\n"
+                + "Licencia: " + objChofer.getLicenciaChofer();
     }
 
-    public String datos_registrar_motor(String tipoMotor, String caballosFuerza) {
-        motorModelo objMotor = new motorModelo(tipoMotor, caballosFuerza);
+    public String datos_registrar_motor(String tipoMotor, String numeroSerie, String caballosFuerza) {
+        motorModelo objMotor = new motorModelo(tipoMotor, numeroSerie, caballosFuerza);
 
         String errorTipo = objMotor.validarTipoMotor(tipoMotor);
-        String errorCaballos = objMotor.validarCaballosFuerza(caballosFuerza);
+        String errorNumeroSerie = objMotor.validarNumeroSerie(numeroSerie);
+        String errorCaballosFuerza = objMotor.validarCaballosFuerza(caballosFuerza);
 
-        if (errorTipo != null || errorCaballos != null) {
+        if (errorTipo != null || errorNumeroSerie != null || errorCaballosFuerza != null) {
             StringBuilder mensaje = new StringBuilder("No se pudo registrar el motor:\n");
             if (errorTipo != null) {
                 mensaje.append("- ").append(errorTipo).append("\n");
             }
-            if (errorCaballos != null) {
-                mensaje.append("- ").append(errorCaballos).append("\n");
+            if (errorNumeroSerie != null) {
+                mensaje.append("- ").append(errorNumeroSerie).append("\n");
+            }
+            if (errorCaballosFuerza != null) {
+                mensaje.append("- ").append(errorCaballosFuerza).append("\n");
             }
             return mensaje.toString();
         }
 
         this.ultimoMotorRegistrado = objMotor;
+        repositorio.guardarMotor(objMotor);
 
         return "Motor registrado correctamente\n"
                 + "Tipo: " + objMotor.getTipoMotor() + "\n"
+                + "Número de serie: " + objMotor.getNumeroSerie() + "\n"
                 + "Caballos de fuerza: " + objMotor.getCaballosFuerza();
     }
 
@@ -120,6 +136,7 @@ public class frontController {
         }
 
         this.ultimoPasajeroRegistrado = objPasajero;
+        repositorio.guardarPasajero(objPasajero);
 
         return "Pasajero registrado correctamente\n"
                 + "Nombre: " + objPasajero.getNombrePasajero() + "\n"

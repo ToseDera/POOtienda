@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class choferVista {
 
-    public void vistaChofer(Scanner sc) {
-        choferModelo objChofer = new choferModelo("", "", "");
+    public void vistaChofer(Scanner sc, frontController controlador) {
+        choferModelo objChofer = new choferModelo("", "", "", "");
         boolean exito;
 
         String nombre;
@@ -40,9 +40,19 @@ public class choferVista {
             }
         } while (!exito);
 
-        frontController controlador = new frontController();
+        String licencia;
+        do {
+            System.out.print("Licencia del chofer: ");
+            licencia = sc.nextLine();
+            exito = objChofer.setLicenciaChofer(licencia);
+            if (!exito) {
+                System.out.println("Error: " + objChofer.getUltimoError());
+            }
+        } while (!exito);
+
         String resultado = controlador.datos_registrar_chofer(
-                objChofer.getNombreChofer(), objChofer.getApellidoChofer(), objChofer.getCedulaChofer());
+                objChofer.getNombreChofer(), objChofer.getApellidoChofer(), objChofer.getCedulaChofer(),
+                objChofer.getLicenciaChofer());
         System.out.println(resultado);
     }
 }

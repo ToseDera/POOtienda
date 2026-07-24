@@ -6,13 +6,15 @@ public class choferModelo {
     public String nombreChofer = "";
     String apellidoChofer = "";
     String cedulaChofer = "";
+    String licenciaChofer = "";
     String ultimoError = null;
 
     // Constructor
-    public choferModelo(String datoNombre, String datoApellido, String datoCedula) {
+    public choferModelo(String datoNombre, String datoApellido, String datoCedula, String datoLicencia) {
         setNombreChofer(datoNombre);
         setApellidoChofer(datoApellido);
         setCedulaChofer(datoCedula);
+        setLicenciaChofer(datoLicencia);
     }
 
     // Getters
@@ -26,6 +28,10 @@ public class choferModelo {
 
     public String getCedulaChofer() {
         return cedulaChofer;
+    }
+
+    public String getLicenciaChofer() {
+        return licenciaChofer;
     }
 
     public String getUltimoError() {
@@ -66,6 +72,17 @@ public class choferModelo {
         return true;
     }
 
+    public boolean setLicenciaChofer(String licenciaChofer) {
+        String error = validarLicencia(licenciaChofer);
+        if (error != null) {
+            this.ultimoError = error;
+            return false;
+        }
+        this.licenciaChofer = licenciaChofer;
+        this.ultimoError = null;
+        return true;
+    }
+
     // Validaciones
     public String validarNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
@@ -87,10 +104,21 @@ public class choferModelo {
         return null;
     }
 
+    public String validarLicencia(String licencia) {
+        if (licencia == null || licencia.trim().isEmpty()) {
+            return "La licencia no puede estar vacía";
+        }
+        if (!licencia.trim().matches("[A-Za-z0-9-]{5,15}")) {
+            return "La licencia debe tener entre 5 y 15 caracteres alfanuméricos";
+        }
+        return null;
+    }
+
     // Valida datos del chofer
     public boolean esValido() {
         return validarNombre(nombreChofer) == null
                 && validarNombre(apellidoChofer) == null
-                && validarCedula(cedulaChofer) == null;
+                && validarCedula(cedulaChofer) == null
+                && validarLicencia(licenciaChofer) == null;
     }
 }

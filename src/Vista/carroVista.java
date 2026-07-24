@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class carroVista {
 
-    public void vistaCarro(Scanner sc) {
+    public void vistaCarro(Scanner sc, frontController controlador) {
         carroModelo objCarro = new carroModelo("", "", "", "");
         boolean exito;
 
@@ -50,7 +50,6 @@ public class carroVista {
             }
         } while (!exito);
 
-        frontController controlador = new frontController();
         String resultado = controlador.datos_registrar_carro(
                 objCarro.getPlacaCarro(), objCarro.getColorCarro(), objCarro.getMarcaCarro(),
                 objCarro.getModeloCarro());

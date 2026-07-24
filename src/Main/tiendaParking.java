@@ -1,5 +1,6 @@
 package Main;
 
+import Controlador.frontController;
 import Vista.carroVista;
 import Vista.choferVista;
 import Vista.motorVista;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class tiendaParking {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        frontController controlador = new frontController();
         int opcion = -1;
 
         while (opcion != 0) {
@@ -30,16 +32,16 @@ public class tiendaParking {
 
             switch (opcion) {
                 case 1:
-                    new choferVista().vistaChofer(sc);
+                    new choferVista().vistaChofer(sc, controlador);
                     break;
                 case 2:
-                    new carroVista().vistaCarro(sc);
+                    new carroVista().vistaCarro(sc, controlador);
                     break;
                 case 3:
-                    new motorVista().vistaMotor(sc);
+                    new motorVista().vistaMotor(sc, controlador);
                     break;
                 case 4:
-                    new pasajeroVista().vistaPasajero(sc);
+                    new pasajeroVista().vistaPasajero(sc, controlador);
                     break;
                 case 0:
                     System.out.println("Saliendo...");

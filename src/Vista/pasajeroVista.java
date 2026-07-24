@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class pasajeroVista {
 
-    public void vistaPasajero(Scanner sc) {
+    public void vistaPasajero(Scanner sc, frontController controlador) {
         pasajeroModelo objPasajero = new pasajeroModelo("", "", "");
         boolean exito;
 
@@ -40,7 +40,6 @@ public class pasajeroVista {
             }
         } while (!exito);
 
-        frontController controlador = new frontController();
         String resultado = controlador.datos_registrar_pasajero(
                 objPasajero.getNombrePasajero(), objPasajero.getApellidoPasajero(), objPasajero.getCedulaPasajero());
         System.out.println(resultado);
